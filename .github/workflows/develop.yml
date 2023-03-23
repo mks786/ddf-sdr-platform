@@ -77,12 +77,18 @@ jobs:
 
     
       
-    - name: Install Python 3.10
-      # Install python required for the setup
-      uses: actions/setup-python@v3
+#    - name: Install Python 3.7
+#      # Install python required for the setup
+#      uses: actions/setup-python@v1
+#      with:
+#        python-version: 3.7
+ 
+    - uses: actions/setup-python@v4
       with:
-        python-version: 3.10
-        
+        python-version: '3.9'
+        cache: 'pip' # caching pip dependencies
+    - run: pip install -r requirements.txt
+
     - name: Install pip3
       # Install pip required for the setup
       run: python -m pip install --upgrade pip setuptools wheel
