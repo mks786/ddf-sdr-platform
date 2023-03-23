@@ -79,9 +79,10 @@ jobs:
       
     - name: Install Python 3.10
       # Install python required for the setup
-      uses: actions/setup-python@v3
+      uses: actions/setup-python@v4
       with:
         python-version: 3.10
+    - run: python my_script.py
         
     - name: Install pip3
       # Install pip required for the setup
