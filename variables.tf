@@ -312,7 +312,7 @@ variable "apioperations" {
         api_name     = "sdr-api"
         display_name = "V2 Put Study Definitions"
         method       = "PUT"
-        url_template = "/v2/studydefinitions"
+        url_template = "/v2/studydefinitions/{studyid}"
     },
     {
         operation_id = "check-group-name"
@@ -399,11 +399,11 @@ variable "apioperations_tp" {
         tempname     = "studyId"
     },
     {
-        operation_id = "common-get-audit-trail"
+        operation_id = "common-get-revision-history"
         api_name     = "sdr-api"   
-        display_name = "Common - Get Audit Trail"
+        display_name = "Common - Get Revision History"
         method       = "GET"
-        url_template = "/studydefinitions/{studyId}/audittrail"
+        url_template = "/studydefinitions/{studyId}/revisionhistory"
         tempname     = "studyId"
     },
     {
@@ -471,11 +471,11 @@ variable "apioperations_tp" {
     #     tempname     = ["studyId","studydesignId"]
     # },
     {
-        operation_id = "common-get-audit-trail-sdruiapi"
+        operation_id = "common-get-revision-history-sdruiapi"
         api_name     = "sdr-ui-api"   
-        display_name = "Common - Get Audit Trail"
+        display_name = "Common - Get Revision History"
         method       = "GET"
-        url_template = "/studydefinitions/{studyId}/audittrail"
+        url_template = "/studydefinitions/{studyId}/revisionhistory"
         tempname     = "studyId"
     },
     {
@@ -545,7 +545,7 @@ variable "application_type" {
 ######################APP Insights End    ###################################################
 
 
-######################APP Service Begin  ###################################################
+######################APP Service Begin  #####################################################
 
 variable "https_only" {
 
@@ -774,6 +774,10 @@ variable "index9" {
 
     default =  ["clinicalStudy.studyIdentifiers.studyIdentifierScope.organisationType.decode"]
 }
+variable "index10" {
+
+    default =  ["auditTrail.usdm-version"]
+}
 
 variable "collectionname2" {
 
@@ -790,6 +794,11 @@ variable "collectionname3" {
 variable "collectionname4" {
 
     default = "ChangeAudit"
+
+}
+variable "collectionname5" {
+
+  default = "StudyDefinitions"
 
 }
 

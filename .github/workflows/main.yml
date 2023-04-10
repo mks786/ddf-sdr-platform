@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CICD_main_Shared
+name: CICD_main_Demo
 
 # Controls when the workflow will run
 on:
@@ -14,14 +14,14 @@ on:
   workflow_dispatch:
        inputs:
           tag:
-           description: 'Pre Prod Build'
+           description: 'Demo Build'
 jobs:
   
-  ############################-----------------Validation Stage--------------------##################################
+  ############################-----------------Validation Stage--------------------###################################
   
   Check_Validation:
     runs-on: ubuntu-latest
-    environment: PRE_PROD
+    environment: DEMO
     # The agent type used to build and deploy
     env:
       # Environment variables used in different stages, all are defined globally to be used
@@ -35,7 +35,7 @@ jobs:
       Blob_Key: ${{ secrets.AZURE_RMKEY}}
       
       # group refers to the name of the env which we need to create in azure portal
-      group: Test
+      group: demo
     steps:
       # Step to Login to Azure Portal
     - uses: actions/checkout@v2
@@ -55,6 +55,7 @@ jobs:
         find variables.tf -type f -exec sed -i ''s/#{Subnet-IP}#/'${{ secrets.Subnet_IP }}'/g'' {} \;
         find variables.tf -type f -exec sed -i ''s/#{Subnet-Dsaddress1}#/'${{ secrets.Subnet_Dsaddress1 }}'/g'' {} \;
         find variables.tf -type f -exec sed -i ''s/#{Subnet-Dsaddress2}#/'${{ secrets.Subnet_Dsaddress2 }}'/g'' {} \;
+        find variables.tf -type f -exec sed -i ''s/#{Subnet-Dsaddress3}#/'${{ secrets.Subnet_Dsaddress3 }}'/g'' {} \;
         find variables.tf -type f -exec sed -i ''s/#{Publisher-Email}#/'${{ secrets.Publisher_Email }}'/g'' {} \;
         find variables.tf -type f -exec sed -i ''s/#{Serviceprincipal}#/${{ secrets.Serviceprincipal }}/g'' {} \;
         find variables.tf -type f -exec sed -i ''s/#{Publisher-Name}#/${{ secrets.Publisher_Name }}/g'' {} \;
@@ -111,7 +112,7 @@ jobs:
     # needs is passed here so that this job run after Check_Validation job
     runs-on: ubuntu-latest
     # The agent type used to build and deploy
-    environment: PRE_PROD
+    environment: DEMO
     env:
       # Environment variables used in different stages, all are defined globally to be used
       RESOURCE_GROUP: ${{ secrets.AZURE_RESOURCEGROUP }}
@@ -134,6 +135,7 @@ jobs:
         find variables.tf -type f -exec sed -i ''s/#{Subnet-IP}#/'${{ secrets.Subnet_IP }}'/g'' {} \;
         find variables.tf -type f -exec sed -i ''s/#{Subnet-Dsaddress1}#/'${{ secrets.Subnet_Dsaddress1 }}'/g'' {} \;
         find variables.tf -type f -exec sed -i ''s/#{Subnet-Dsaddress2}#/'${{ secrets.Subnet_Dsaddress2 }}'/g'' {} \;
+        find variables.tf -type f -exec sed -i ''s/#{Subnet-Dsaddress3}#/'${{ secrets.Subnet_Dsaddress3 }}'/g'' {} \;
         find variables.tf -type f -exec sed -i ''s/#{Publisher-Email}#/'${{ secrets.Publisher_Email }}'/g'' {} \;
         find variables.tf -type f -exec sed -i ''s/#{Serviceprincipal}#/${{ secrets.Serviceprincipal }}/g'' {} \;
         find variables.tf -type f -exec sed -i ''s/#{Publisher_Name}#/${{ secrets.Publisher_Name }}/g'' {} \;

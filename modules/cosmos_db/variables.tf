@@ -98,6 +98,9 @@ variable "collectionname3" {
 variable "collectionname4" {
   
 }
+variable "collectionname5" {
+  
+}
 
 variable "index1" {
   
@@ -109,7 +112,7 @@ variable "index2" {
 
 variable "index3" {
   
-}
+} 
 
 variable "index4" {
   
@@ -132,6 +135,9 @@ variable "index8" {
 }
 
 variable "index9" {
+  
+}
+variable "index10" {
   
 }
 
